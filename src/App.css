@@ -33,7 +33,7 @@
   padding: 50px;
 }
 .left_side {
-  float:left; /* add this */
+  float:left;
   background-color: #333333;
   border-radius: 6px;
   width: 200px;
@@ -77,3 +77,42 @@
   background-color: #FF9900;
 }
 
+/* For the Team Page */
+
+.player_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.player_list li a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.player_list li img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.player_list li a h2 {
+  color: black;
+  font-size: 24px;
+  margin: 0;
+}
+
+.player_list li a p {
+  font-size: 18px;
+  margin: 0;
+  color: #666;
+}
+
+.team_container {
+  padding-top: 40px;
+  padding-left: 10%;
+  max-width: 30%;
+}

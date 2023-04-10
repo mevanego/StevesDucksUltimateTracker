@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import Players from './components/Players';
 import Team from './components/Team';
 import Games from './components/Games';
+import SinglePlayer from './components/SinglePlayer';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/players' element={<Players />} />
         <Route path='/team' element={<Team />} />
         <Route path='/games' element={<Games />}/>
+        <Route path='/player/:name' element={<SinglePlayer />}/>
       </Routes>
     </Router>
   );
