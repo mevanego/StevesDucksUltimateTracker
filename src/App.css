@@ -1,0 +1,79 @@
+.App-header {
+  background-color: #282c34;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.navLink {
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.navLink:hover {
+  color: grey;
+}
+
+/* For the Players Page */
+.div_table_buttons {
+  background-color:#eeeeee;
+  display:inline;      
+}
+.table_buttons li{
+  display: inline;
+}
+
+/* For the Games Page */
+.main {
+  padding: 50px;
+}
+.left_side {
+  float:left; /* add this */
+  background-color: #333333;
+  border-radius: 6px;
+  width: 200px;
+}
+.right_side {
+  padding-left: 100px;
+  float: left; /* add this */
+}
+
+.games_header{
+  color: white;
+  text-align: center;
+  background-color: #555555;
+  margin: 0;
+  padding: 1px;
+  border-radius: 6px;
+}
+
+.games {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.game_button, .selected_game {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.game_button:hover {
+  background-color: #111111;
+}
+
+.selected_game {
+  background-color: #FF9900;
+}
+
