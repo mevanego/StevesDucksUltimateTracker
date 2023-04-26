@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useContext} from 'react';
-
+import Parser from "../Parser"
 
 import '../App.css';
 
@@ -215,6 +215,8 @@ const Players = () => {
     let table = <table>
         {tableState}
     </table>
+
+    console.log(Parser.Parser)
 
 
     return (

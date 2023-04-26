@@ -120,4 +120,4 @@ JSONS[0].forEach((arg) => console.log(arg.name))
 JSONS[1].forEach((arg) => console.log(arg.opponent))
 */
 
-//export default Parser
+export default Parser
