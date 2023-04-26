@@ -1,55 +1,10 @@
 import React, {useState, useEffect,useContext} from 'react';
-import Parser from "../Parser"
+//import Parser from "../Parser"
 
 import '../App.css';
 
-
-const Players = () => {
-    const [tableState, setTableState] = useState(0)
-    
-    // Lists of players to be replaced by JSON 
-    let player_list = [
-        {
-            name: "scoob",
-            goals: 123,
-            assists: 3,
-            Ds: 20,
-            drops: 3,
-            pullsOB: 2,
-            throws: 100,
-            turnovers: 1
-        },
-        {
-            name: "dylan",
-            goals: 234,
-            assists: 5,
-            Ds: 900,
-            drops: 3,
-            pullsOB: 1,
-            throws: 200,
-            turnovers: 1
-        },
-        {
-            name: "charles",
-            goals: 345,
-            assists: 3,
-            Ds: 10,
-            drops: 3,
-            pullsOB: 2,
-            throws: 150,
-            turnovers: 1
-        },
-        {
-            name: "alex",
-            goals: 12,
-            assists: 1,
-            Ds: 10,
-            drops: 3,
-            pullsOB: -1,
-            throws: 20,
-            turnovers: 1
-        }
-    ]
+export const playersInfo = (player_list, tableState) => {    // Gets all player info for current table state 
+    var list
 
     // Headers for Summary stats
     let summHeaders_list = [
@@ -77,7 +32,7 @@ const Players = () => {
         {
             name: "Pass %",
             data: (player) => {
-                return Number((player.throws - player.turnovers) / 
+                return Number((player.throws - (player.drops + player.throwaways)) / 
                     player.throws).toFixed(2)
             }
         },
@@ -85,8 +40,7 @@ const Players = () => {
             name: "Points Played",
             data: (player) => {return 0}
         }
-    ]
-    
+    ] 
     // Headers for Offence stats
     let oHeaders_list = [
         {
@@ -150,7 +104,6 @@ const Players = () => {
             }
         }
     ]
-
     // Headers for Defence stats
     let dHeaders_list = [
         {
@@ -178,46 +131,82 @@ const Players = () => {
             }
         }
     ]
-
-    const playersInfo = () => {    // Gets all player info for current table state 
-        var list
-        switch (tableState) {
-            case 0:
-                list = summHeaders_list
-                break
-            case 1:
-                list = oHeaders_list
-                break
-            case 2:
-                list = dHeaders_list
-                break
-        }
-
-        return (
-            <table className="player_table">
-                <thead>
-                    <tr>
-                        {list.map((header) => <th key={header}> {header.name} </th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {player_list.map((player) => (
-                        <tr>
-                            {list.map((header) => <td>{header.data(player)}</td> )}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>       
-        )
+    
+    switch (tableState) {
+        case 0:
+            list = summHeaders_list
+            break
+        case 1:
+            list = oHeaders_list
+            break
+        case 2:
+            list = dHeaders_list
+            break
     }
-   
-    //have a goon do the table changing
-    let table = <table>
-        {tableState}
-    </table>
 
-    console.log(Parser.Parser)
+    return (
+        <table className="player_table">
+            <thead>
+                <tr>
+                    {list.map((header) => <th key={header}> {header.name} </th>)}
+                </tr>
+            </thead>
+            <tbody>
+                {player_list.map((player) => (
+                    <tr>
+                        {list.map((header) => <td>{header.data(player)}</td> )}
+                    </tr>
+                ))}
+            </tbody>
+        </table>       
+    )
+}
+const Players = () => {
+    const [tableState, setTableState] = useState(0)
 
+    // Lists of players to be replaced by JSON
+    let player_list = [
+        {
+            name: "scoob",
+            goals: 123,
+            assists: 3,
+            Ds: 20,
+            drops: 3,
+            pullsOB: 2,
+            throws: 100,
+            throwaways: 1
+        },
+        {
+            name: "dylan",
+            goals: 234,
+            assists: 5,
+            Ds: 900,
+            drops: 3,
+            pullsOB: 1,
+            throws: 200,
+            throwaways: 1
+        },
+        {
+            name: "charles",
+            goals: 345,
+            assists: 3,
+            Ds: 10,
+            drops: 3,
+            pullsOB: 2,
+            throws: 150,
+            throwaways: 1
+        },
+        {
+            name: "alex",
+            goals: 12,
+            assists: 1,
+            Ds: 10,
+            drops: 3,
+            pullsOB: -1,
+            throws: 20,
+            throwaways: 1
+        }
+    ]
 
     return (
         <div class='main'>
@@ -247,8 +236,7 @@ const Players = () => {
                     </ul>
                 </div>
                 <div>
-                    {playersInfo()}
-                    {table}
+                    {playersInfo(player_list, tableState)}
                 </div>
             </div>
         </div>
