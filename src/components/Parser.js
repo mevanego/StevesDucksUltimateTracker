@@ -1,10 +1,12 @@
-function Parser(datefilter = "", teamfilter = "") {
+
+
+function Parser() {
 const playerJSONbase = '{"name":"", "drops":0, "catches":0, "completions":0, "throws":0, "throwaways":0, "pulls":0, "pullsOB":0, "scores":0, "assists":0, "Ds":0 }';
 const gameJSONbase = '{"game":"", "opponent":"", "ScoreHome":0, "ScoreAway":0 }'
 
 var playerJSONS = []
 var gameJSONS = []
-var filepath = "../StevensAll-stats.csv";
+var filepath = "../../StevensAll-stats.csv";
 var filetext = ""
 const fs = require('fs')
 const util = require("util");
@@ -17,8 +19,7 @@ function CreateList() {
 
     for (var i=1; i<allTextLines.length; i++) {
         var data = allTextLines[i].split(',');
-        if(datefilter != "" && data[0] != datefilter) {continue;}
-        if(teamfilter != "" && data[2] != teamfilter) {continue;}
+        
         if (data[8] == "Goal") {
             var name1 = data[10]
             var name2 = data[9]
@@ -48,13 +49,13 @@ function CreateList() {
             
         }
         else if (data[8] == "Pull") {
-            var name1 = data[9]
+            var name1 = data[11]
             var player = playerJSONS.find((arg) => {return (arg.name == name1)})
             if (player == undefined) {player = JSON.parse(playerJSONbase); player.name = name1; if(name1 != "" && name1 != "Anonymous") {playerJSONS.push(player)}}
             player.pulls++;
         }    
         else if (data[8] == "PullOb") {
-            var name1 = data[9]
+            var name1 = data[11]
             var player = playerJSONS.find((arg) => {return (arg.name == name1)})
             if (player == undefined) {player = JSON.parse(playerJSONbase); player.name = name1; if(name1 != "" && name1 != "Anonymous") {playerJSONS.push(player)}}
             player.pulls++ 
@@ -115,8 +116,12 @@ return [playerJSONS, gameJSONS]
 }
 
 
-var JSONS = Parser("", "");
+var JSONS = Parser();
 console.log(JSONS[0].length)
+var temp = JSONS[0].find((arg) => {return arg.name == 'Charles'})
+temp.scores = 22;
+temp.drops = 0;
+temp.throws = 341;
 JSONS[0].forEach((arg) => console.log(arg))
 JSONS[1].forEach((arg) => console.log(arg))
 
