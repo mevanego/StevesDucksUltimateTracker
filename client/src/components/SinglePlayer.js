@@ -6,7 +6,7 @@ const SinglePlayer = () =>{
 
     return (
         <div>
-            {params.name}
+            This is the page for {params.name}
         </div>
     )
 }
