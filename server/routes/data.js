@@ -1,8 +1,18 @@
 const express = require('express');
+const filter = require('jade/lib/filters');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', async (req, res) => {
+router.get('/:game', async (req, res) => {
+
+    
+  if(req.params.game == "AllGames") {
+    gameFilter = "";
+  }
+  else {
+    gameFilter = req.params.game;
+  }
+
   const playerJSONbase = '{"name":"", "drops":0, "catches":0, "completions":0, "throws":0, "throwaways":0, "pulls":0, "pullsOB":0, "scores":0, "assists":0, "Ds":0 }';
   const gameJSONbase = '{"game":"", "opponent":"", "ScoreHome":0, "ScoreAway":0 }'
 
@@ -15,12 +25,12 @@ router.get('/', async (req, res) => {
   filetext = fs.readFileSync(filepath, 'utf-8') 
   CreateList();
   
-  function CreateList() {
+  function CreateList(filter = "") {
       var allTextLines = filetext.split(/\r\n|\n/);
   
       for (var i=1; i<allTextLines.length; i++) {
           var data = allTextLines[i].split(',');
-          
+          if(gameFilter != "" && gameFilter != data[0]) {continue;}
           if (data[8] == "Goal") {
               var name1 = data[10]
               var name2 = data[9]
