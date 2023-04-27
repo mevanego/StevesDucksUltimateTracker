@@ -168,60 +168,14 @@ const Players = () => {
     useEffect(() =>  {
         async function fetchData(){
             try {
-                const data = await axios.get("https://localhost:4000")
-                console.log(data)
+                const {data} = await axios.get("http://localhost:4000")
+                setPlayerList(data[0])
             } catch(e) {
                 console.log(e)
             }
         }
         fetchData();
-    }, [playerList]) 
-
-    console.log(playerList)
-
-    // Lists of players to be replaced by JSON
-    let player_list = [
-        {
-            name: "scoob",
-            goals: 123,
-            assists: 3,
-            Ds: 20,
-            drops: 3,
-            pullsOB: 2,
-            throws: 100,
-            throwaways: 1
-        },
-        {
-            name: "dylan",
-            goals: 234,
-            assists: 5,
-            Ds: 900,
-            drops: 3,
-            pullsOB: 1,
-            throws: 200,
-            throwaways: 1
-        },
-        {
-            name: "charles",
-            goals: 345,
-            assists: 3,
-            Ds: 10,
-            drops: 3,
-            pullsOB: 2,
-            throws: 150,
-            throwaways: 1
-        },
-        {
-            name: "alex",
-            goals: 12,
-            assists: 1,
-            Ds: 10,
-            drops: 3,
-            pullsOB: -1,
-            throws: 20,
-            throwaways: 1
-        }
-    ]
+    }, []) 
 
     return (
         <div class='main'>
@@ -251,7 +205,7 @@ const Players = () => {
                     </ul>
                 </div>
                 <div>
-                    {playersInfo(player_list, tableState)}
+                    {playersInfo(playerList, tableState)}
                 </div>
             </div>
         </div>

@@ -11,60 +11,16 @@ const Games = () =>{
 
     useEffect(() =>  {
         async function fetchData(){
-                const data = await axios.get("https://localhost:4000")
+            try {
+                const {data} = await axios.get("http://localhost:4000")
+                setPlayerList(data[0])
+                setGameList(data[1])
+            } catch(e) {
+                console.log(e)
+            }
         }
         fetchData();
-    }, [playerList, gameList]) 
-
-    // Lists of players to be replaced by JSON
-    let player_list = [
-        {
-            name: "scoob",
-            goals: 123,
-            assists: 3,
-            Ds: 20,
-            drops: 3,
-            pullsOB: 2,
-            throws: 100,
-            throwaways: 1
-        },
-        {
-            name: "dylan",
-            goals: 234,
-            assists: 5,
-            Ds: 900,
-            drops: 3,
-            pullsOB: 1,
-            throws: 200,
-            throwaways: 1
-        },
-        {
-            name: "charles",
-            goals: 345,
-            assists: 3,
-            Ds: 10,
-            drops: 3,
-            pullsOB: 2,
-            throws: 150,
-            throwaways: 1
-        },
-        {
-            name: "alex",
-            goals: 12,
-            assists: 1,
-            Ds: 10,
-            drops: 3,
-            pullsOB: -1,
-            throws: 20,
-            throwaways: 1
-        }
-    ]
-
-    let game_list = ['Stevens v Dickenson',
-                     'Stevens v Salisbury',
-                     'Stevens v RUIT',
-                     'Stevens v Stockton']
-
+    }, []) 
 
     const build_game_list = (game, index) =>{
         return(
@@ -73,7 +29,7 @@ const Games = () =>{
                 setTableState(0);
             }}>
                 <a>
-                    {game}
+                    Stevens v {game.opponent} ({game.ScoreHome} - {game.ScoreAway})
                 </a>
             </li>
         );
@@ -89,7 +45,7 @@ const Games = () =>{
                 </div>
                 <div class='div_games'>
                     <ul class='games'>
-                        {game_list.map((game, index) => build_game_list(game, index))}
+                        {gameList.map((game, index) => build_game_list(game, index))}
                     </ul>
                 </div>
             </div>
@@ -120,7 +76,7 @@ const Games = () =>{
                         </ul>
                     </div>
                     <div>
-                        {playersInfo(player_list, tableState)}
+                        {playersInfo(playerList, tableState)}
                         {tableState} {gameState}
                     </div>
                 </div>

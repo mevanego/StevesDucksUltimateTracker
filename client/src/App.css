@@ -36,7 +36,7 @@
   float:left;
   background-color: #333333;
   border-radius: 6px;
-  width: 200px;
+  min-width: 250px;
 }
 .right_side {
   padding-left: 100px;
