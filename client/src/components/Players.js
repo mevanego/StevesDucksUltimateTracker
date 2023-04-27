@@ -22,12 +22,10 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
             }
         },
         {
-            name: "O Eff.",
-            data: (player) => {return 0}
-        },
-        {
-            name: "D Eff.",
-            data: (player) => {return 0}
+            name: "Efficiency %",
+            data: (player) => {
+                return ((player.pWon / player.pointsPlayed) * 100).toFixed(0)
+            }
         },
         {
             name: "Passing %",
@@ -41,7 +39,9 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         },
         {
             name: "Points Played",
-            data: (player) => {return 0}
+            data: (player) => {
+                return player.pointsPlayed
+            }
         }
     ] 
     // Headers for Offence stats
