@@ -17,7 +17,7 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         {
             name: "Plus Minus",
             data: (player) => {
-                return (player.goals + player.assists + 
+                return (player.scores + player.assists + 
                     player.Ds - player.drops)
             }
         },
@@ -52,7 +52,7 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         {
             name: "Goals",
             data: (player) => {
-                return player.goals
+                return player.scores
             }
         },
         {
@@ -64,43 +64,43 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         {
             name: "Catches",
             data: (player) => {
-                return 0
+                return player.catches
             }
         },
         {
             name: "Completions",
             data: (player) => {
-                return 0
+                return player.completions
             }
         },
         {
             name: "Throwaways",
             data: (player) => {
-                return 0
+                return player.throwaways
             }
         },
         {
             name: "Touches",
             data: (player) => {
-                return 0
+                return player.drops + player.Ds + player.catches
             }
         },
         {
             name: "Drops",
             data: (player) => {
-                return 0
+                return player.drops
             }
         },
         {
             name: "Passing %",
             data: (player) => {
-                return 0
+                return ((player.throws - player.throwaways) / player.throws).toFixed(2)
             }
         },
         {
             name: "Catching %",
             data: (player) => {
-                return 0
+                return (player.catches / (player.catches + player.drops)).toFixed(2)
             }
         }
     ]
@@ -121,7 +121,7 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         {
             name: "Pulls",
             data: (player) => {
-                return 0
+                return player.pulls
             }
         },
         {
