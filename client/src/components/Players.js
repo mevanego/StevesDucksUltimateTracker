@@ -30,10 +30,13 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
             data: (player) => {return 0}
         },
         {
-            name: "Pass %",
+            name: "Passing %",
             data: (player) => {
-                return Number((player.throws - (player.drops + player.throwaways)) / 
-                    player.throws).toFixed(2)
+                let pass = ((player.throws - player.throwaways) / player.throws).toFixed(2)
+                if (isNaN(pass)) {
+                    return "*"
+                }
+                return (pass * 100).toFixed(0)
             }
         },
         {
@@ -94,13 +97,21 @@ export const playersInfo = (player_list, tableState) => {    // Gets all player 
         {
             name: "Passing %",
             data: (player) => {
-                return ((player.throws - player.throwaways) / player.throws).toFixed(2)
+                let pass = ((player.throws - player.throwaways) / player.throws).toFixed(2)
+                if (isNaN(pass)) {
+                    return "*"
+                }
+                return (pass * 100).toFixed(0)
             }
         },
         {
             name: "Catching %",
             data: (player) => {
-                return (player.catches / (player.catches + player.drops)).toFixed(2)
+                let cat = (player.catches / (player.catches + player.drops)).toFixed(2)
+                if (isNaN(cat)) {
+                    return "*"
+                }
+                return (cat * 100).toFixed(0)
             }
         }
     ]
