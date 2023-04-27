@@ -168,7 +168,7 @@ const Players = () => {
     useEffect(() =>  {
         async function fetchData(){
             try {
-                const {data} = await axios.get("http://localhost:4000")
+                const {data} = await axios.get("http://localhost:4000/AllGames")
                 setPlayerList(data[0])
             } catch(e) {
                 console.log(e)

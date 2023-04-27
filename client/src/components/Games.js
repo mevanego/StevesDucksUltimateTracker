@@ -12,15 +12,17 @@ const Games = () =>{
     useEffect(() =>  {
         async function fetchData(){
             try {
-                const {data} = await axios.get("http://localhost:4000")
-                setPlayerList(data[0])
+                const {data} = await axios.get("http://localhost:4000/AllGames")
                 setGameList(data[1])
+                const data2 = await axios.get(`http://localhost:4000/${data[1][gameState].game}`)
+                setPlayerList(data2.data[0])
+
             } catch(e) {
                 console.log(e)
             }
         }
         fetchData();
-    }, []) 
+    }, [gameState])
 
     const build_game_list = (game, index) =>{
         return(
